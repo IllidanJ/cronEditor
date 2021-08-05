@@ -1,15 +1,15 @@
 {
-  "name": "vcrontab",
-  "version": "0.3.5",
+  "name": "croneditor",
+  "version": "0.0.1",
   "description": "vue 的 cron 组件，支持解析/反解析 cron 表达式，生成最近五次的符合条件时间",
-  "author": "smallstone",
+  "author": "illidanj",
   "license": "MIT",
   "main": "lib/vcrontab.umd.min.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:small-stone/vue-crontab.git"
+    "url": "git@github.com:IllidanJ/cronEditor.git"
   },
-  "homepage": "https://small-stone.github.io/vCrontab/dist/",
+  "homepage": "https://github.com/IllidanJ/cronEditor",
   "keywords": [
     "cron",
     "vue",
