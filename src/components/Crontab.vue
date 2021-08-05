@@ -208,7 +208,7 @@ export default {
           insVlaue = 3;
         } else {
           insVlaue = 4;
-          this.$refs[refName].checkboxList = value.split(",");
+          this.$refs[refName].checkboxList = value.split(",").map(v => Number(v));
         }
       } else if (name == "day") {
         if (value === "*") {
