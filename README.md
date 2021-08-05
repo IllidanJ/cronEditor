@@ -9,18 +9,18 @@ vue 的 cron 组件，支持解析/反解析 cron 表达式，生成最近五次
 ## 安装方式
 
 ```
-npm install cronEditor
+npm install @illidanj/cron-editor
 ```
 
 ## 引入方式
 
 ```javascript
 //全局引入
-import vcrontab from "cronEditor";
+import vcrontab from "@illidanj/cron-editor";
 Vue.use(vcrontab); //使用方式：<vcrontab></vcrontab>
 
 //单独引入
-import vcrontab from "cronEditor";
+import vcrontab from "@illidanj/cron-editor";
 export default {
   components: { vcrontab },
 };
