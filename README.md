@@ -1,26 +1,26 @@
-# [demo](https://small-stone.github.io/vCrontab/dist/)
-
 ![](public/demo.png)
 
 # vue-crontab
 
 vue 的 cron 组件，支持解析/反解析 cron 表达式，生成最近五次的符合条件时间，依赖 vue2 和 element-ui
 
+根据小石头的项目进行二次开发，修复部分bug
+
 ## 安装方式
 
 ```
-npm install vcrontab
+npm install cronEditor
 ```
 
 ## 引入方式
 
 ```javascript
 //全局引入
-import vcrontab from "vcrontab";
+import vcrontab from "cronEditor";
 Vue.use(vcrontab); //使用方式：<vcrontab></vcrontab>
 
 //单独引入
-import vcrontab from "vcrontab";
+import vcrontab from "cronEditor";
 export default {
   components: { vcrontab },
 };
@@ -42,7 +42,7 @@ export default {
 </template>
 
 <script>
-import vcrontab from 'vcrontab'
+import vcrontab from 'cronEditor'
 export default {
     components: { vcrontab },
     data() {
