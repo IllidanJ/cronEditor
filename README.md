@@ -73,6 +73,9 @@ export default {
 
 - hideComponent
   需要隐藏的组件数组，依次为`['second','min','hour','day','mouth','week','year']`
+  
+- defaultExpression
+  默认cron表达式，重置后cron会被设置为该值，默认为 `* * * * * ?`
 
 ## 方法
 
