@@ -116,6 +116,7 @@ import CrontabMouth from "./Crontab-Mouth.vue";
 import CrontabWeek from "./Crontab-Week.vue";
 import CrontabYear from "./Crontab-Year.vue";
 import CrontabResult from "./Crontab-Result.vue";
+import { cronValidate } from '@/utils'
 
 export default {
   data() {
@@ -135,16 +136,16 @@ export default {
     };
   },
   name: "vcrontab",
-  props: ["expression", "hideComponent"],
+  props: ["expression", "hideComponent", 'defaultExpression'],
   methods: {
     shouldHide(key) {
       if (this.hideComponent && this.hideComponent.includes(key)) return false;
       return true;
     },
-    resolveExp() {
+    resolveExp(expression) {
       //反解析 表达式
-      if (this.expression) {
-        let arr = this.expression.split(" ");
+      if (expression) {
+        let arr = expression.split(" ");
         if (arr.length >= 6) {
           //6 位以上是合法表达式
           let obj = {
@@ -163,9 +164,6 @@ export default {
             if (obj[i]) this.changeRadio(i, obj[i]);
           }
         }
-      } else {
-        //没有传入的表达式 则还原
-        this.clearCron();
       }
     },
     // tab切换值
@@ -175,9 +173,9 @@ export default {
     // 由子组件触发，更改表达式组成的字段值
     updateContabValue(name, value, from) {
       "updateContabValue", name, value, from;
-      this.contabValueObj[name] = value;
+      this.$set(this.contabValueObj, name, value)
       if (from && from !== name) {
-        console.log(`来自组件 ${from} 改变了 ${name} ${value}`);
+        // console.log(`来自组件 ${from} 改变了 ${name} ${value}`);
         this.changeRadio(name, value);
       }
     },
@@ -186,7 +184,6 @@ export default {
       let arr = ["second", "min", "hour", "mouth"],
         refName = "cron" + name,
         insVlaue;
-
       if (!this.$refs[refName]) return;
 
       if (arr.includes(name)) {
@@ -303,24 +300,16 @@ export default {
     },
     // 填充表达式
     submitFill() {
+      const result = cronValidate(this.contabValueString)
+      if (typeof result !== 'boolean') {
+        return this.$emit('error', result)
+      }
       this.$emit("fill", this.contabValueString);
       this.hidePopup();
     },
     clearCron() {
       // 还原选择项
-      ("准备还原");
-      this.contabValueObj = {
-        second: "*",
-        min: "*",
-        hour: "*",
-        day: "*",
-        mouth: "*",
-        week: "?",
-        year: "",
-      };
-      for (let j in this.contabValueObj) {
-        this.changeRadio(j, this.contabValueObj[j]);
-      }
+      this.resolveExp(this.defaultExpression || '* * * * * ?')
     },
   },
   computed: {
@@ -353,14 +342,25 @@ export default {
     CrontabResult,
   },
   watch: {
-    expression: "resolveExp",
-    hideComponent(value) {
-      // 隐藏部分组件
-    },
+    expression: {
+      handler(val) {
+        if (!val)  {
+          this.clearCron()
+          return
+        }
+        this.resolveExp(val)
+      }, 
+      immediate: true
+    }
   },
-  mounted: function() {
-    this.resolveExp();
-  },
+  mounted() {
+    // 初始化
+    if (this.expression) {
+      this.resolveExp(this.expression)
+    } else {
+      this.clearCron()
+    }
+  }
 };
 </script>
 <style scoped>

@@ -72,25 +72,15 @@ export default {
 		// 单选按钮值变化时
 		radioChange() {
 			('day rachange');
-			if (this.radioValue === 1) {
-				this.$emit('update', 'day', '*', 'day');
-				this.$emit('update', 'week', '?', 'day');
-				this.$emit('update', 'mouth', '*', 'day');
-			} else {
-				if (this.cron.hour === '*') {
-					this.$emit('update', 'hour', '0', 'day');
-				}
-				if (this.cron.min === '*') {
-					this.$emit('update', 'min', '0', 'day');
-				}
-				if (this.cron.second === '*') {
-					this.$emit('update', 'second', '0', 'day');
-				}
-			}
 
 			switch (this.radioValue) {
+				case 1:
+					this.$emit('update', 'day', '*', 'day');
+					this.$emit('update', 'week', '?', 'day');
+					break;
 				case 2:
 					this.$emit('update', 'day', '?');
+					this.$emit('update', 'week', '*');
 					break;
 				case 3:
 					this.$emit('update', 'day', this.cycle01 + '-' + this.cycle02);

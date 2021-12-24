@@ -53,7 +53,6 @@ export default {
 		radioChange() {
 			if (this.radioValue === 1) {
 				this.$emit('update', 'mouth', '*');
-				this.$emit('update', 'year', '*');
 			} else {
 				if (this.cron.day === '*') {
 					this.$emit('update', 'day', '0', 'mouth');

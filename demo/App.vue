@@ -8,7 +8,11 @@
       <vcrontab
         @hide="showCron=false"
         @fill="crontabFill"
+        @error='handleError'
         :expression="expression"
+        :hide-component="['second', 'min', 'year']"
+        defaultExpression="0 0 10 * * ?"
+        :needValidate='true'
       ></vcrontab>
     </el-dialog>
   </div>
@@ -35,6 +39,9 @@ export default {
       " this.expression ", this.expression;
       this.showCron = true;
     },
+    handleError(message) {
+      this.$message.error(message)
+    }
   },
 };
 </script>
