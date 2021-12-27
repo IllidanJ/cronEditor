@@ -198,11 +198,9 @@ export default {
 						} else if (this.dayRule == 'weekDay') {
 							//如果指定了是星期几
 							//获取当前日期是属于星期几
-							debugger
 							let thisWeek = this.formatDate(new Date(YY + '-' + MM + '-' + DD + ' 00:00:00'), 'week');
 							//校验当前星期是否在星期池（dayRuleSup）中
 							if (!this.dayRuleSup.includes(thisWeek)) {
-								debugger
 								// 如果到达最大值时
 								if (Di == DDate.length - 1) {
 									resetDay();

@@ -265,7 +265,7 @@ export default {
           insVlaue = 5;
         } else {
           this.$refs[refName].checkboxList = value.split(",");
-          insVlaue = 7;
+          insVlaue = 6;
         }
       } else if (name == "year") {
         if (value == "") {
